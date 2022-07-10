@@ -5,11 +5,13 @@ import org.apache.log4j.Logger;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.spark.sql.functions.*;
 
 public class Demo01SparkSQL {
     public static void main(String[] args) {
+//        /*private static*/ final org.slf4j.Logger log = LoggerFactory.getLogger(Demo01SparkSQL.class);
         // 日志处理
         Logger.getLogger("org.apache.spark").setLevel(Level.WARN);
         Logger.getLogger("org.apache.hadoop").setLevel(Level.WARN);
