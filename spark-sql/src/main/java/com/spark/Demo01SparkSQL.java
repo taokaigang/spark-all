@@ -16,7 +16,7 @@ public class Demo01SparkSQL {
         Logger.getLogger("org.spark_project").setLevel(Level.WARN);
 
         //1. 获取到入口
-        SparkSession session = SparkSession
+        SparkSession spark = SparkSession
                 .builder()
                 .appName("Demo01SparkSQL")
 //                .config("spark.some.config.option", "some-value")
@@ -24,7 +24,7 @@ public class Demo01SparkSQL {
                 .getOrCreate();
 
         //2. 读取json
-        Dataset<Row> df = session.read().json("/Users/kgt/code/idea/spark-all/spark-sql/src/main/resources/people.json");
+        Dataset<Row> df = spark.read().json("/Users/kgt/code/idea/spark-all/spark-sql/src/main/resources/people.json");
 
         //3. 打印元信息
 //        df.show();
@@ -39,7 +39,7 @@ public class Demo01SparkSQL {
         // sql
         df.createOrReplaceTempView("people");
 
-        session.sql("select\n" +
+        spark.sql("select\n" +
                 "count(age)\n" +
                 "from\n" +
                 "people\n" +
@@ -51,7 +51,7 @@ public class Demo01SparkSQL {
         df.groupBy("age")
                 .agg(collect_list(concat_ws("-",col("name")).as("ctws"))).show();
 
-        session.stop();
+        spark.stop();
 
     }
 }
